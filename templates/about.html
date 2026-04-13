@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us | RR Global Professionals</title>
+  <link rel="icon" href="{{ url_for('static', filename='images/logo_final.png') }}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    /* Navigation */
+    nav {
+      background-color: white;
+      padding: 15px 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+   .navbar-nav .nav-link {
+  color: #333;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 0.5rem 1.2rem;
+  margin: 0 8px;  /* extra spacing between tabs */
+  letter-spacing: 0.5px;
+  position: relative;
+  text-decoration: none;
+  background-image: linear-gradient(#007b5e, #007b5e);
+  background-size: 0% 2px;
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  transition: background-size 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #007b5e;
+  background-size: 100% 2px; /* animates underline only under text */
+}
+
+
+ /* About Section */
+    .about-section {
+      padding: 120px 20px 40px;
+      background: #fff;
+    }
+
+    @media (max-width: 767px) {
+  .about-section {
+    padding: 80px 15px 30px; /* smaller padding */
+  }
+
+  .about-section h1 {
+    font-size: 28px;  /* resize heading */
+    margin-bottom: 20px;
+  }
+}
+    .about-section h1 {
+  padding-top: 70px; /* equal to navbar height */
+}
+    .about-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      max-width: 1200px;
+      margin: auto;
+      align-items: center;
+    }
+
+    .about-img, .about-text {
+      flex: 1 1 100%;
+      text-align: center;
+    }
+
+    .about-img img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .about-text h2 {
+      font-size: 28px;
+      margin-bottom: 15px;
+      color: #1e463e;
+    }
+
+    .about-text p {
+      font-size: 16px;
+      color: #555;
+      line-height: 1.7;
+    }
+
+    /* Vision/Mission & Why Us Boxes */
+    .icon-box-section {
+      padding: 60px 20px;
+    }
+
+    .icon-box {
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+
+    .icon-box img {
+      height: 70px;
+      margin-bottom: 15px;
+    }
+
+    .icon-box h3 {
+      font-size: 20px;
+      color: #1e463e;
+    }
+
+    .icon-box p {
+      font-size: 15px;
+      color: #444;
+    }
+
+   @media (max-width: 768px) {
+  .footer-clock .col-3 {
+    width: 50%;
+    margin-bottom: 15px;
+  }
+}
+
+.why-card {
+  transition: all 0.3s ease;
+}
+.why-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+.why-card:hover h5 {
+  color: #0d6efd; /* Bootstrap primary blue */
+}
+
+ /* Footer */
+    footer {
+      background:  #001F3F;
+      color: white;
+      padding: 40px 20px;
+    }
+
+    footer h5 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    footer p, footer a {
+      font-size: 14px;
+    }
+
+     /*social media*/
+    .social-icons a.social-icon {
+  color: white;
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.social-icons a.social-icon.instagram:hover {
+  color: #e4405f; /* Instagram pink */
+}
+
+.social-icons a.social-icon.facebook:hover {
+  color: #1877f2; /* Facebook blue */
+}
+
+.social-icons a.social-icon.linkedin:hover {
+  color: #0a66c2; /* LinkedIn blue */
+}
+
+
+/*Footer Clock*/
+.clock {
+  width: 100px;
+  height: 100px;
+  border: 3px solid #333;
+  border-radius: 50%;
+  position: relative;
+  margin: auto;
+  background: #fff;
+}
+
+/* Base for hands */
+.hand {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: 50% 100%;  /* pivot at bottom */
+  transform: translate(-50%, -100%);  /* center properly */
+}
+
+.hand.hour {
+  width: 4px;
+  height: 25%;
+  background: #000;
+  border-radius: 2px;
+}
+
+.hand.minute {
+  width: 3px;
+  height: 35%;
+  background: #444;
+  border-radius: 2px;
+}
+
+.hand.second {
+  width: 2px;
+  height: 40%;
+  background: red;
+}
+
+/* Numbers styling */
+.clock-number {
+  position: absolute;
+  font-size: 10px;
+  font-weight: bold;
+  color: #222;
+  transform: translate(-50%, -50%);
+}
+
+/* Footer layout */
+.footer-clock {
+  display: flex;
+  align-items: flex-end;   /* align items at top */
+  justify-content: flex-end; /* keep items side by side */
+  flex-wrap: wrap;   /* wrap on small screens */
+  gap: 20px;         /* spacing between items */
+}
+
+.footer-clock > div {
+  text-align: center;
+  min-width: 120px;  /* ensures clocks don’t shrink too small */
+}
+
+.footer-bottom p {
+  text-align: left;   /* aligned left */
+  margin: 0;
+  padding: 10px 20px; /* some left spacing */
+  font-size: 14px;
+  color: white;
+}
+
+
+    @media (min-width: 768px) {
+      .about-img, .about-text {
+        flex: 1 1 45%;
+        text-align: left;
+      }
+
+      .about-text h2 {
+        font-size: 36px;
+      }
+
+      .about-text p {
+        font-size: 18px;
+      }
+
+      .nav-links {
+        gap: 30px;
+      }
+    }
+}
+
+.dropdown-menu {
+  min-width: 250px;
+  padding: 20px 0;
+  border-radius: 20px;
+}
+.dropdown-item img {
+  filter: brightness(0) saturate(100%) invert(36%) sepia(99%) saturate(543%) hue-rotate(178deg) brightness(91%) contrast(87%);
+}
+
+.dropdown-menu a.dropdown-item:hover {
+  background-color: #f5f5f5;
+  color: #007b5e;
+}
+
+@media (max-width: 768px) {
+  .footer-clock .col-3 {
+    width: 50%;
+    margin-bottom: 15px;
+  }
+}
+
+/*meet our Team*/
+.card:hover {
+  transform: translateY(-5px);
+  transition: 0.3s ease;
+}
+
+.certificate-box {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .certificate-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  }
+
+
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <!-- Responsive Navbar with Toggle -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+  <div class="container-fluid px-4">
+    <!-- Logo -->
+    <a class="navbar-brand" href="/">
+      <img src="{{ url_for('static', filename='images/logo_final.png') }}" alt="Logo" style="height: 100px;">
+    </a>
+
+    <!-- Toggler button (hamburger) -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Links -->
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+      <ul class="navbar-nav mb-2 mb-lg-0 fw-semibold" style="font-family: 'Poppins', sans-serif;">
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="/about">About Us</a>
+        </li>
+         <!-- Dropdown for Services -->
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle fw-semibold" href="#" id="servicesDropdown" role="button"
+     data-bs-toggle="dropdown" aria-expanded="false">
+    Services
+  </a>
+  <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 rounded-4 mt-2" aria-labelledby="servicesDropdown">
+    <li>
+      <a class="dropdown-item d-flex align-items-center gap-2" href="/tax-preparation">
+        <i class="bi bi-receipt-cutoff text-primary"></i> Tax Preparation
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center gap-2" href="/accounting-bookkeeping">
+        <i class="bi bi-journal-bookmark text-primary"></i> Accounting & Bookkeeping
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center gap-2" href="/audit">
+        <i class="bi bi-shield-check icon-style text-primary"></i> Assistance in Audit
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center gap-2" href="/financial-analysis">
+        <i class="bi bi-graph-up-arrow icon-style text-primary"></i> Financial Analysis
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center gap-2" href="/payroll">
+        <i class="bi bi-calendar-week icon-style text-primary"></i> Payroll Processing & Employee Records
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center gap-2" href="/finalisation">
+        <i class="bi bi-pencil-square icon-style text-primary"></i>  Accounts Finalisation
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center gap-2" href="//mis-reporting">
+        <i class="bi bi-bar-chart-line icon-style text-primary"></i> MIS & Management Reporting
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center gap-2" href="/financial-statements">
+        <i class="bi bi-journal-check icon-style text-primary"></i>  Preparation of Financial Statements
+      </a>
+    </li>
+  </ul>
+</li>
+       <!-- <li class="nav-item">
+          <a class="nav-link text-dark" href="#">Global Coverage</a>
+        </li>-->
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="/contactus">Contact Us</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<br>
+
+  <!-- About Section -->
+  <section class="about-section">
+  <h1 class="fw-bold text-center mb-5" style="color:#001F3F;">ABOUT</h1>
+  <div class="about-container">
+
+    <!-- Left: Image -->
+    <div class="about-img">
+      <img src="{{ url_for('static', filename='images/logo_final2.jpg') }}" alt="About RR Global">
+    </div>
+
+    <!-- Right: Text -->
+    <div class="about-text">
+      <h2 class="fw-bold text-start mb-5" style="color:#001F3F;">RR Global Professionals</h2>
+      <p>RR Global Professionals specializes in providing offshore accounting services and audit support services tailored for CPAs and accounting firms.</p>
+      <p>Our team of qualified professionals delivers accurate, timely, and compliant solutions, including bookkeeping, tax preparation, and audit documentation.</p>
+      <p>We act as an extended arm of your practice—helping you scale efficiently, reduce overhead costs, and focus on high-value client advisory services.</p>
+    </div>
+
+  </div>
+</section>
+
+
+  <!-- Vision & Mission Section -->
+  <section class="icon-box-section bg-white">
+    <h1 class="fw-bold text-center mb-5" style="color:#001F3F;">Vision & Mission</h1>
+    <div class="row g-4 justify-content-center container mx-auto">
+      <div class="col-md-5 icon-box">
+        <img src="{{ url_for('static', filename='images/vision.png') }}" alt="Vision">
+        <h3>Our Vision</h3>
+        <p>To be globally respected for delivering excellence, integrity, and innovation in every service.</p>
+      </div>
+      <div class="col-md-5 icon-box">
+        <img src="{{ url_for('static', filename='images/mission.png') }}" alt="Mission">
+        <h3>Our Mission</h3>
+        <p>To empower businesses with reliable financial, tax, and advisory solutions through long-term ethical partnerships.</p>
+      </div>
+    </div>
+  </section>
+
+<!-- Why RR Global Section -->
+<section class="bg-light py-5">
+  <div class="container">
+    <h2 class="fw-bold text-center mb-5" style="color:#001F3F;">Why RR Global Professionals?</h2>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
+      {% for icon, title, desc in [
+        ['confidential.png', 'Confidentiality', 'We treat your data as state secrets – totally access-controlled and bound by NDAs.'],
+        ['cost saving.png', 'Cost Savings', 'Enjoy 40–50% cost savings without compromising quality or deadlines.'],
+        ['timezone.png', 'Time Zone', 'India’s time zone provides a round-the-clock service advantage to global clients.'],
+        ['datasecurity.png', 'Data Security', '3-tier security—physical, digital, and personal.']
+      ] %}
+      <div class="col">
+        <div class="why-card p-4 bg-white rounded-4 shadow-sm text-center h-100">
+          <img src="{{ url_for('static', filename='images/' + icon) }}"
+               alt="{{ title }}"
+               style="height: 60px;"
+               class="mb-3">
+          <h5 class="fw-bold text-dark">{{ title }}</h5>
+          <p class="text-muted mb-0">{{ desc }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Google Reviews Section
+<section class="container py-5">
+  <h2 class="text-center mb-4"></h2>
+
+  <!-- Elfsight Google Reviews
+  <div class="elfsight-app-585f05dc-2b66-4c3a-b3c0-6a28b1231a14" data-elfsight-app-lazy></div>
+ <script src="https://static.elfsight.com/platform/platform.js" async></script>
+</section>-->
+
+
+
+<section class="team-section py-5 bg-light">
+  <div class="container">
+    <h2 class="fw-bold text-center mb-5" style="color:#001F3F;">Meet Our Team</h2>
+    <div class="row g-4 justify-content-center"> <!-- use justify-content-center -->
+
+      <div class="col-md-5 col-sm-6">
+  <div class="card border-0 shadow-sm text-center h-100">
+    <div class="card-body p-4 text-start"> <!-- text-start for better readability -->
+
+      <h6 class="fw-bold mb-2 text-center">CA REEMA RAHUL PUNMIYA</h6>
+      <p class="text-muted small text-center mb-3">FOUNDER & CHARTERED ACCOUNTANT</p>
+
+      <p class="text-secondary small mb-3">
+        Qualified Chartered Accountant (ICAI, 2023) and the driving force behind RR Global Professionals. With a strong academic background and diverse professional expertise, she specializes in providing end-to-end financial, taxation, and compliance solutions with a focus on Real Estate, Income Tax, and Business Structuring.
+      </p>
+
+      <p class="text-secondary small mb-2"><strong>Key Expertise:</strong></p>
+      <ul class="text-secondary small mb-3" style="padding-left:18px;">
+        <li>Income Tax</li>
+        <li>Goods & Services Tax (GST)</li>
+        <li>Real Estate (RERA)</li>
+        <li>Companies Act compliance</li>
+      </ul>
+
+      <p class="text-secondary small mb-3">
+        She has successfully handled audits and non-audit cases under the Income Tax Act, advised on business restructuring & entity conversions, and assisted clients with registrations and compliance under multiple regulatory frameworks.
+      </p>
+
+      <p class="text-secondary small mb-3"><strong>Academic & Professional Credentials:</strong></p>
+      <ul class="text-secondary small mb-3" style="padding-left:18px;">
+        <li>Bachelor of Commerce (Mumbai University)</li>
+        <li>Associate Member of ICAI (Membership No. 624916)</li>
+        <li>Certificate Course on Artificial Intelligence for Chartered Accountants (AICA – Level 1)</li>
+      </ul>
+
+      <p class="text-secondary small mb-4">
+        With a commitment to trust, transparency, and financial excellence, she delivers tailored solutions to individuals, businesses, and corporates both in India and internationally.
+      </p>
+
+      <div class="text-center">
+        <a href="https://www.linkedin.com/in/ca-reema-surve-punmiya-8154837b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" class="text-primary fs-5">
+          <i class="bi bi-linkedin"></i>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+      <div class="col-md-5 col-sm-6">
+  <div class="card border-0 shadow-sm text-center h-100">
+    <div class="card-body p-4 text-start">
+
+      <h6 class="fw-bold mb-2 text-center">CA RAHUL PUNMIYA</h6>
+      <p class="text-muted small text-center mb-3">CO-FOUNDER & CHARTERED ACCOUNTANT</p>
+
+      <p class="text-secondary small mb-3">
+        Qualified as a Chartered Accountant in 2018, he has been in active practice since then and joined the firm as a full-time partner. His core specialization lies in <strong>Goods and Services Tax (GST)</strong> compliance, advisory, and litigation, with extensive experience in representing clients before GST authorities. He has also assisted in GST audits of listed companies and provides end-to-end guidance in complex tax matters.
+      </p>
+
+      <p class="text-secondary small mb-2"><strong>Additional Expertise:</strong></p>
+      <ul class="text-secondary small mb-3" style="padding-left:18px;">
+        <li>Accounting & CFO Services</li>
+        <li>Business Advisory</li>
+        <li>Merchant Exporters & Works Contractors</li>
+        <li>Architects & Coaching Institutions</li>
+        <li>Engineering Firms & E-Commerce Companies</li>
+        <li>Pre-Owned Car Dealers & Doctors</li>
+        <li>Traders & Shipping/Freight Forwarders</li>
+        <li>Call Centres, Co-operative Societies & Trusts</li>
+      </ul>
+
+      <p class="text-secondary small mb-3">
+        Recently, he successfully completed the <strong>Certificate Course on Overseas Outsourcing Services (US Market)</strong> conducted by the ICAI – reflecting his commitment to global opportunities in outsourcing, accounting, and financial services.
+      </p>
+
+      <div class="text-center">
+        <a href="https://www.linkedin.com/in/rahul-punmiya-5ba144121?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank" class="text-primary fs-5">
+          <i class="bi bi-linkedin"></i>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</section>
+
+<!-- Certificate Section -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <h2 class="fw-bold text-center mb-5 text-dark"></h2>
+    <div class="row justify-content-center">
+
+      <!-- Certificate 1 -->
+      <div class="col-md-5 col-sm-8">
+        <div class="certificate-box shadow-sm rounded bg-white p-3 text-center">
+          <img src="{{ url_for('static', filename='images/Reema certificate.png') }}"
+               alt="Certificate 1" class="img-fluid rounded">
+        </div>
+      </div>
+
+      <!-- Certificate 2-->
+      <div class="col-md-5 col-sm-8">
+        <div class="certificate-box shadow-sm rounded bg-white p-3 text-center">
+          <img src="{{ url_for('static', filename='images/Rahul_certificate.png') }}"
+               alt="Certificate 2" class="img-fluid rounded">
+        </div>
+      </div>
+
+      <!-- Certificate 3
+      <div class="col-md-4 col-sm-6">
+        <div class="certificate-box shadow-sm rounded bg-white p-3 text-center">
+          <img src="{{ url_for('static', filename='images/certificate3.png') }}"
+               alt="Certificate 3" class="img-fluid rounded">
+        </div>
+      </div>-->
+
+    </div>
+  </div>
+</section>
+
+
+
+
+ <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <!-- Logo and Links -->
+      <div class="col-md-3">
+        <img src="{{ url_for('static', filename='images/logo_final2.jpg') }}" alt="Logo" style="width: 200px;">
+
+        <!-- Social Media Icons
+<div class="d-flex justify-content-center gap-4 mt-3 social-icons">
+  <a href="https://www.instagram.com/weinstitute.cs" target="_blank" class="social-icon instagram">
+    <i class="fab fa-instagram"></i>
+  </a>
+  <a href="https://www.facebook.com/WissenEducation.319?mibextid=ZbWKwL" target="_blank" class="social-icon facebook">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+  <a href="https://www.linkedin.com/in/hrishikeshshriramsalunkhe?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="social-icon linkedin">
+    <i class="fab fa-linkedin-in"></i>
+  </a>
+</div>-->
+
+      </div>
+
+      <!-- Company Info -->
+      <div class="col-md-2">
+        <h5>Company</h5>
+        <ul class="list-unstyled">
+          <li><a href="/about" class="text-white text-decoration-none">About Us</a></li>
+          <li><a href="/contactus" class="text-white text-decoration-none">Connect</a></li>
+        </ul>
+      </div>
+
+      <!-- Services -->
+      <div class="col-md-2">
+        <h5>Services</h5>
+        <ul class="list-unstyled">
+          <li><a href="/tax-preparation" class="text-white text-decoration-none">Tax Preparation</a></li>
+          <li><a href="/accounting-bookkeeping" class="text-white text-decoration-none">Bookkeeping</a></li>
+          <li><a href="/audit" class="text-white text-decoration-none">Audit & Assurance</a></li>
+          <li><a href="/financial-analysis" class="text-white text-decoration-none">Financial Analysis</a></li>
+          <li><a href="/finalisation" class="text-white text-decoration-none">Accounts Finalisation</a></li>
+          <li><a href="/payroll" class="text-white text-decoration-none">Payroll Services</a></li>
+          <li><a href="/mis-reporting" class="text-white text-decoration-none">MIS & Management Reporting</a></li>
+		  <li><a href="/financial-statements" class="text-white text-decoration-none">Preparation of Financials</a></li>
+        </ul>
+      </div>
+
+      <!-- Address -->
+      <div class="col-md-2">
+          <h5>Address</h5>
+        <p>
+          1st Floor, Flat no. 4,<br>
+          Sairavidarshan Society,<br>
+          Tembhi Naka, Edulji Road,<br>
+          Thane West 400601
+        </p>
+      </div>
+
+      <!-- Contact and Clocks -->
+      <div class="col-md-3">
+        <h5>Contact Us</h5>
+        <p><strong>+91 9699702464<br>+91 9819454678</strong></p>
+        <p>rrglobalprofessionals@gmail.com</p>
+        </div>
+
+        <div class="footer-clock">
+
+  <!-- India -->
+  <div>
+    <div class="clock" id="clock-india-analog">
+    </div>
+    <strong>India</strong><br>
+    <span id="clock-india"></span>
+  </div>
+
+  <!-- USA -->
+  <div>
+    <div class="clock" id="clock-usa-analog">
+    </div>
+    <strong>USA</strong><br>
+    <span id="clock-usa"></span>
+  </div>
+
+  <!-- UK -->
+  <div>
+    <div class="clock" id="clock-uk-analog">
+    </div>
+    <strong>UK</strong><br>
+    <span id="clock-uk"></span>
+  </div>
+
+  <!-- UAE -->
+  <div>
+    <div class="clock" id="clock-uae-analog">
+    </div>
+    <strong>UAE</strong><br>
+    <span id="clock-uae"></span>
+  </div>
+
+  <!-- Canada -->
+  <div>
+    <div class="clock" id="clock-canada-analog">
+    </div>
+    <strong>Canada</strong><br>
+    <span id="clock-canada"></span>
+  </div>
+</div>
+
+<!-- copyright line -->
+<div class="footer-bottom">
+  <p>Copyright © 2025 RR GLOBAL PROFESSIONALS | All rights reserved.</p>
+</div>
+</footer>
+
+  <!-- JavaScript for Clocks -->
+  <script>
+   function createAnalogClock(id) {
+  const clock = document.getElementById(id);
+
+  // Add hands
+  ["hour","minute","second"].forEach(cls=>{
+    const hand=document.createElement("div");
+    hand.classList.add("hand",cls);
+    clock.appendChild(hand);
+  });
+
+  // Add numbers 1–12
+  for (let num = 1; num <= 12; num++) {
+    const angle = (num - 3) * (Math.PI * 2) / 12;
+    const x = 50 + 42 * Math.cos(angle); // adjust radius
+    const y = 50 + 42 * Math.sin(angle);
+
+    const number = document.createElement("div");
+    number.className = "clock-number";
+    number.style.left = x + "%";
+    number.style.top = y + "%";
+    number.textContent = num;
+
+    clock.appendChild(number);
+  }
+}
+
+
+
+["clock-india-analog","clock-usa-analog","clock-uk-analog","clock-uae-analog","clock-canada-analog"].forEach(createAnalogClock);
+
+function updateClocks() {
+  const options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+
+  function updateTime(spanId, tz) {
+    const now = new Date().toLocaleTimeString("en-US", { ...options, timeZone: tz });
+    const [time, ampm] = now.split(" ");
+    document.getElementById(spanId).innerHTML = `<span class="digital-time">${time}</span><span class="digital-ampm">${ampm}</span>`;
+  }
+
+  updateTime("clock-india", "Asia/Kolkata");
+  updateTime("clock-usa", "America/New_York");
+  updateTime("clock-uk", "Europe/London");
+  updateTime("clock-uae", "Asia/Dubai");
+  updateTime("clock-canada", "America/Toronto");
+
+  // Analog hands
+  function setHands(id, tz) {
+    const now = new Date(new Date().toLocaleString("en-US",{timeZone:tz}));
+    const sec = now.getSeconds() * 6;
+    const min = now.getMinutes() * 6 + now.getSeconds()*0.1;
+    const hr  = ((now.getHours()%12) * 30) + (now.getMinutes()*0.5);
+
+    const clock = document.getElementById(id);
+    clock.querySelector(".hour").style.transform  = `translate(-50%, -100%) rotate(${hr}deg)`;
+    clock.querySelector(".minute").style.transform= `translate(-50%, -100%) rotate(${min}deg)`;
+    clock.querySelector(".second").style.transform= `translate(-50%, -100%) rotate(${sec}deg)`;
+  }
+
+  setHands("clock-india-analog","Asia/Kolkata");
+  setHands("clock-usa-analog","America/New_York");
+  setHands("clock-uk-analog","Europe/London");
+  setHands("clock-uae-analog","Asia/Dubai");
+  setHands("clock-canada-analog","America/Toronto");
+}
+
+setInterval(updateClocks, 1000);
+updateClocks();
+  </script>
+
+  <!-- Bootstrap JS Bundle (includes Popper.js) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+</body>
+</html>

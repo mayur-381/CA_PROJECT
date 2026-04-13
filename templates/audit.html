@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Assistance in Audit | RR Global Professionals</title>
+
+  <!-- Stylesheets -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="icon" href="{{ url_for('static', filename='images/logo_final.png') }}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8f9fa;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    /* Navbar */
+    nav {
+      background-color: #fff;
+      padding: 15px 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .navbar-nav .nav-link {
+  color: #333;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 0.5rem 1.2rem;
+  margin: 0 8px;  /* extra spacing between tabs */
+  letter-spacing: 0.5px;
+  position: relative;
+  text-decoration: none;
+  background-image: linear-gradient(#007b5e, #007b5e);
+  background-size: 0% 2px;
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  transition: background-size 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #007b5e;
+  background-size: 100% 2px; /* animates underline only under text */
+}
+
+    /* Hero */
+    .tax-hero {
+      background-color: #001F3F;
+      padding: 140px 20px 40px;
+      color: white;
+      text-align: center;
+    }
+
+    .stylish-heading {
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+
+    /* Footer */
+    footer {
+      background: #001F3F;
+      color: white;
+      padding: 40px 20px;
+    }
+
+    footer h5 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    footer p, footer a {
+      font-size: 14px;
+      color: white;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    .clock {
+  width: 100px;
+  height: 100px;
+  border: 3px solid #333;
+  border-radius: 50%;
+  position: relative;
+  margin: auto;
+  background: #fff;
+}
+
+/* Base for hands */
+.hand {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: 50% 100%;  /* pivot at bottom */
+  transform: translate(-50%, -100%);  /* center properly */
+}
+
+.hand.hour {
+  width: 4px;
+  height: 25%;
+  background: #000;
+  border-radius: 2px;
+}
+
+.hand.minute {
+  width: 3px;
+  height: 35%;
+  background: #444;
+  border-radius: 2px;
+}
+
+.hand.second {
+  width: 2px;
+  height: 40%;
+  background: red;
+}
+
+/* Numbers styling */
+.clock-number {
+  position: absolute;
+  font-size: 10px;
+  font-weight: bold;
+  color: #222;
+  transform: translate(-50%, -50%);
+}
+
+/* Footer layout */
+.footer-clock {
+  display: flex;
+  align-items: flex-end;   /* align items at top */
+  justify-content: flex-end; /* keep items side by side */
+  flex-wrap: wrap;   /* wrap on small screens */
+  gap: 20px;         /* spacing between items */
+}
+
+.footer-clock > div {
+  text-align: center;
+  min-width: 120px;  /* ensures clocks don’t shrink too small */
+}
+
+.footer-bottom p {
+  text-align: left;   /* aligned left */
+  margin: 0;
+  padding: 10px 20px; /* some left spacing */
+  font-size: 14px;
+  color: white;
+}
+
+
+    /* Dropdown */
+    .dropdown-menu {
+      min-width: 250px;
+      padding: 20px 0;
+      border-radius: 20px;
+    }
+
+    .dropdown-item img {
+      filter: brightness(0) saturate(100%) invert(36%) sepia(99%) saturate(543%) hue-rotate(178deg) brightness(91%) contrast(87%);
+    }
+
+    .dropdown-item:hover {
+      background-color: #f5f5f5;
+      color: #007b5e;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .navbar-brand img {
+        height: 60px;
+      }
+      .navbar-nav .nav-link {
+        text-align: center;
+      }
+      .dropdown-menu {
+        max-height: 300px;
+        overflow-y: auto;
+      }
+      .tax-box {
+        padding: 20px 15px;
+      }
+      .tax-section {
+        padding: 30px 10px;
+        gap: 20px;
+      }
+      footer .row > div {
+        margin-bottom: 20px;
+      }
+
+    }
+
+    @media (max-width: 576px) {
+      section p.lead {
+        font-size: 16px;
+        line-height: 1.6;
+      }
+    }
+
+     /*social media*/
+    .social-icons a.social-icon {
+  color: white;
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.social-icons a.social-icon.instagram:hover {
+  color: #e4405f; /* Instagram pink */
+}
+
+.social-icons a.social-icon.facebook:hover {
+  color: #1877f2; /* Facebook blue */
+}
+
+.social-icons a.social-icon.linkedin:hover {
+  color: #0a66c2; /* LinkedIn blue */
+}
+
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm py-1">
+  <div class="container-fluid px-3">
+    <a class="navbar-brand" href="#">
+      <img src="{{ url_for('static', filename='images/logo_final.png') }}" alt="Logo" height="90">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link fw-semibold" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link fw-semibold" href="/about">About Us</a></li>
+           <!-- Dropdown for Services -->
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle fw-semibold" href="#" id="servicesDropdown" role="button"
+     data-bs-toggle="dropdown" aria-expanded="false">
+    Services
+  </a>
+  <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 rounded-4 mt-2" aria-labelledby="servicesDropdown">
+    <li>
+      <a class="dropdown-item d-flex align-items-center gap-2" href="/tax-preparation">
+        <i class="bi bi-receipt-cutoff text-primary"></i> Tax Preparation
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center gap-2" href="/accounting-bookkeeping">
+        <i class="bi bi-journal-bookmark text-primary"></i> Accounting & Bookkeeping
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center gap-2" href="/audit">
+        <i class="bi bi-shield-check icon-style text-primary"></i> Assistance in Audit
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center gap-2" href="/financial-analysis">
+        <i class="bi bi-graph-up-arrow icon-style text-primary"></i> Financial Analysis
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center gap-2" href="/payroll">
+        <i class="bi bi-calendar-week icon-style text-primary"></i> Payroll Processing & Employee Records
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center gap-2" href="/finalisation">
+        <i class="bi bi-pencil-square icon-style text-primary"></i>  Accounts Finalisation
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center gap-2" href="//mis-reporting">
+        <i class="bi bi-bar-chart-line icon-style text-primary"></i> MIS & Management Reporting
+      </a>
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center gap-2" href="/financial-statements">
+        <i class="bi bi-journal-check icon-style text-primary"></i>  Preparation of Financial Statements
+      </a>
+    </li>
+  </ul>
+</li>
+         <!-- <li class="nav-item"><a class="nav-link fw-semibold" href="#">Global Coverage</a></li>-->
+          <li class="nav-item"><a class="nav-link fw-semibold" href="/contactus">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero -->
+    <div class="tax-hero">
+      <h1 class="stylish-heading display-4">Assistance in Audit</h1>
+    </div>
+
+    <!-- Intro -->
+    <section class="text-center bg-white py-5 px-3">
+      <div class="container">
+        <h2 class="fw-bold mb-3" style="color:#001F3F;">  Streamline Your Finances with Expert Precision</h2>
+        <p  style="font-size: 18px; color: #444; line-height: 1.7;">
+          At <strong>RR Global Professionals</strong>, We assist clients in preparing audit-ready records, ensuring proper documentation, reconciliations, and compliance with statutory requirements.  Our support enables smooth interaction with auditors, reducing the burden on management and ensuring timely completion.
+        </p>
+      </div>
+    </section>
+
+ <!-- Footer -->
+<footer>
+   <div class="container">
+    <div class="row g-4">
+      <!-- Logo, Links, and Social Media -->
+<div class="col-md-3">
+  <img src="{{ url_for('static', filename='images/logo_final2.jpg') }}" alt="Logo" style="width: 200px;"><br></br>
+  <!-- Social Media Icons
+<div class="d-flex justify-content-center gap-4 mt-3 social-icons">
+  <a href="https://www.instagram.com/weinstitute.cs" target="_blank" class="social-icon instagram">
+    <i class="fab fa-instagram"></i>
+  </a>
+  <a href="https://www.facebook.com/WissenEducation.319?mibextid=ZbWKwL" target="_blank" class="social-icon facebook">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+  <a href="https://www.linkedin.com/in/hrishikeshshriramsalunkhe?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="social-icon linkedin">
+    <i class="fab fa-linkedin-in"></i>
+  </a>
+</div>-->
+
+</div>
+
+
+      <!-- Company Info -->
+      <div class="col-md-2">
+        <h5>Company</h5>
+        <ul class="list-unstyled">
+          <li><a href="/about" class="text-white text-decoration-none">About Us</a></li>
+          <li><a href="/contactus" class="text-white text-decoration-none">Connect</a></li>
+        </ul>
+      </div>
+
+      <!-- Services -->
+      <div class="col-md-2">
+        <h5>Services</h5>
+        <ul class="list-unstyled">
+            <li><a href="/tax-preparation" class="text-white text-decoration-none">Tax Preparation</a></li>
+          <li><a href="/accounting-bookkeeping" class="text-white text-decoration-none">Bookkeeping</a></li>
+          <li><a href="/audit" class="text-white text-decoration-none">Audit & Assurance</a></li>
+          <li><a href="/financial-analysis" class="text-white text-decoration-none">Financial Analysis</a></li>
+          <li><a href="/finalisation" class="text-white text-decoration-none">Accounts Finalisation</a></li>
+          <li><a href="/payroll" class="text-white text-decoration-none">Payroll Services</a></li>
+          <li><a href="/mis-reporting" class="text-white text-decoration-none">MIS & Management Reporting</a></li>
+		  <li><a href="/financial-statements" class="text-white text-decoration-none">Preparation of Financials</a></li>
+        </ul>
+      </div>
+
+      <!-- Address -->
+      <div class="col-md-2">
+          <h5>Address</h5>
+        <p>
+          1st Floor, Flat no. 4,<br>
+          Sairavidarshan Society,<br>
+          Tembhi Naka, Edulji Road,<br>
+          Thane West 400601
+        </p>
+      </div>
+
+      <!-- Contact and Clocks -->
+      <div class="col-md-3">
+        <h5>Contact Us</h5>
+        <p><strong>+91 9699702464<br>+91 9819454678</strong></p>
+        <p> rrglobalprofessionals@gmail.com</p>
+        </div>
+
+        <div class="footer-clock">
+
+  <!-- India -->
+  <div>
+    <div class="clock" id="clock-india-analog">
+    </div>
+    <strong>India</strong><br>
+    <span id="clock-india"></span>
+  </div>
+
+  <!-- USA -->
+  <div>
+    <div class="clock" id="clock-usa-analog">
+    </div>
+    <strong>USA</strong><br>
+    <span id="clock-usa"></span>
+  </div>
+
+  <!-- UK -->
+  <div>
+    <div class="clock" id="clock-uk-analog">
+    </div>
+    <strong>UK</strong><br>
+    <span id="clock-uk"></span>
+  </div>
+
+  <!-- UAE -->
+  <div>
+    <div class="clock" id="clock-uae-analog">
+    </div>
+    <strong>UAE</strong><br>
+    <span id="clock-uae"></span>
+  </div>
+
+  <!-- Canada -->
+  <div>
+    <div class="clock" id="clock-canada-analog">
+    </div>
+    <strong>Canada</strong><br>
+    <span id="clock-canada"></span>
+  </div>
+</div>
+<!-- copyright line -->
+<div class="footer-bottom">
+  <p>Copyright © 2025 RR GLOBAL PROFESSIONALS | All rights reserved.</p>
+</div>
+
+
+</footer>
+
+  <!-- JavaScript for Clocks -->
+  <script>
+    function createAnalogClock(id) {
+  const clock = document.getElementById(id);
+
+  // Add hands
+  ["hour","minute","second"].forEach(cls=>{
+    const hand=document.createElement("div");
+    hand.classList.add("hand",cls);
+    clock.appendChild(hand);
+  });
+
+  // Add numbers 1–12
+  for (let num = 1; num <= 12; num++) {
+    const angle = (num - 3) * (Math.PI * 2) / 12;
+    const x = 50 + 42 * Math.cos(angle); // adjust radius
+    const y = 50 + 42 * Math.sin(angle);
+
+    const number = document.createElement("div");
+    number.className = "clock-number";
+    number.style.left = x + "%";
+    number.style.top = y + "%";
+    number.textContent = num;
+
+    clock.appendChild(number);
+  }
+}
+
+
+
+["clock-india-analog","clock-usa-analog","clock-uk-analog","clock-uae-analog","clock-canada-analog"].forEach(createAnalogClock);
+
+function updateClocks() {
+  const options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+
+  function updateTime(spanId, tz) {
+    const now = new Date().toLocaleTimeString("en-US", { ...options, timeZone: tz });
+    const [time, ampm] = now.split(" ");
+    document.getElementById(spanId).innerHTML = `<span class="digital-time">${time}</span><span class="digital-ampm">${ampm}</span>`;
+  }
+
+  updateTime("clock-india", "Asia/Kolkata");
+  updateTime("clock-usa", "America/New_York");
+  updateTime("clock-uk", "Europe/London");
+  updateTime("clock-uae", "Asia/Dubai");
+  updateTime("clock-canada", "America/Toronto");
+
+  // Analog hands
+  function setHands(id, tz) {
+    const now = new Date(new Date().toLocaleString("en-US",{timeZone:tz}));
+    const sec = now.getSeconds() * 6;
+    const min = now.getMinutes() * 6 + now.getSeconds()*0.1;
+    const hr  = ((now.getHours()%12) * 30) + (now.getMinutes()*0.5);
+
+    const clock = document.getElementById(id);
+    clock.querySelector(".hour").style.transform  = `translate(-50%, -100%) rotate(${hr}deg)`;
+    clock.querySelector(".minute").style.transform= `translate(-50%, -100%) rotate(${min}deg)`;
+    clock.querySelector(".second").style.transform= `translate(-50%, -100%) rotate(${sec}deg)`;
+  }
+
+  setHands("clock-india-analog","Asia/Kolkata");
+  setHands("clock-usa-analog","America/New_York");
+  setHands("clock-uk-analog","Europe/London");
+  setHands("clock-uae-analog","Asia/Dubai");
+  setHands("clock-canada-analog","America/Toronto");
+}
+
+setInterval(updateClocks, 1000);
+updateClocks();
+
+  </script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
